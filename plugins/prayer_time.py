@@ -22,7 +22,7 @@ async def remind(message):
             prayer_list = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']
             
             msg = ["🕌 **Prayer Times (JAKIM)**"]
-            msg.append(f"📅 `{date.today()}`\n")
+            msg.append(f"📅 `{date.today().strftime("%d/%m/%Y")}`\n")
             
             for prayer in prayer_list:
                 time = timings.get(prayer)

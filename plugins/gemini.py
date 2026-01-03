@@ -5,10 +5,10 @@ import os
 API_KEY = os.getenv("GEMINI_API_KEY")
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
-MODEL_ID = "gemini-1.5-flash-001"
+MODEL_ID = "models/gemini-1.5-flash"
 
 client = genai.Client(api_key=API_KEY)
-GEN_CONFIG = types.GenerateContentConfig(temperature=1.0, max_output_tokens=800) # Having said this is the optimum output length for Telegram
+GEN_CONFIG = types.GenerateContentConfig(temperature=0.7, max_output_tokens=800) # Having said this is the optimum output length for Telegram
 
 
 async def ask_gemini(message):
