@@ -1,11 +1,11 @@
 from time import strftime
 from adhan import adhan
-from adhan.methods import ISNA, CalculationParameters
+from adhan.methods import ISNA
 from datetime import date
 
 async def remind(message):
     coordinate = (2.1627822, 102.3349452)
-    params = CalculationParameters(method=ISNA, asr='standard')
+    params = {"method" : 'ISNA'}
     today = date.today()
 
     times = adhan(day=today, location=coordinate, parameters=params)
