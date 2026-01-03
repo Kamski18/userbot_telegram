@@ -1,6 +1,6 @@
 import logging
 from pyrogram import Client, filters # type: ignore
-from plugins import gemini
+from plugins import gemini, prayer_time
 import os
 
 # 3. Memory: Disable verbose logging if not needed, or use a leaner format
@@ -28,6 +28,12 @@ async def search_handler(_, message): # _ used for something that we don't use s
     answer = await gemini.ask_gemini(message)
 
     await message.edit_text(answer)
+
+@app.on_message(filters.me & filters.command("pray", prefixes="."))
+async def pray_handlers(_, message):
+    time = await prayer_time.remind(message)
+
+    await message.edit_text(time)
 
 # the fastest way to run modern Python scripts
 if __name__ == "__main__":
