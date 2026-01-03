@@ -30,4 +30,8 @@ async def ask_gemini(message):
 
         return response.text
     except Exception as e:
+        if "429" in str(e):
+            return "**Error:** Gemini rate limit has reach! Please wait for a minute before asking again."
+        elif "MESSAGE_TOO_LONG" in str(e):
+            return "Response provided by Gemini is **too long**! Try again."
         return f"**Error: {str(e)}**"
