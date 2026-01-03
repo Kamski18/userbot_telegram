@@ -1,6 +1,12 @@
 __pycache__/
+<<<<<<< HEAD
 *.env*
 *.session*
 *.log*
 *.venv*
 *.python-version*
+=======
+*.session*
+*.log
+*.json
+>>>>>>> 0687347951119f108a49d305526ac3ff371ef29d
