@@ -6,7 +6,9 @@ from plugins import gemini
 logging.basicConfig(level=logging.WARNING) 
 
 app = Client(
-    name="Kamski's Acount", 
+    name="Kamski's Acount",
+    api_hash=gemini.API_HASH, # type: ignore
+    api_id=gemini.API_ID, # type: ignore
     sleep_threshold=10,      # Optimization: Don't wait too long on flood waits
     in_memory=True           # Memory: Keep session in RAM to avoid slow Disk I/O
 )
