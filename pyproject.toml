@@ -3,11 +3,10 @@ name = "userbot"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "google>=3.0.0",
     "google-genai>=1.56.0",
-    "google-generativeai>=0.8.6",
     "pyrogram>=2.0.106",
-    "requests>=2.32.5",
+    "pyrotgcrypto>=1.2.7",
 ]
