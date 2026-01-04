@@ -1,5 +1,6 @@
 import aiohttp
 from datetime import date, datetime
+import pytz
 
 async def remind(message):
     lat, lon = 2.1627822, 102.3349452
@@ -12,7 +13,11 @@ async def remind(message):
                     return "❌ **Error:** Could not connect to WaktuSolat.app"
 
                 data = await response.json()
-                today_day = date.today().day
+                malaysia = pytz.timezone("Asia/Kuala_Lumpur")
+                utc = pytz.utc
+                now_malaysia = datetime.now(malaysia)
+                today_date = now_malaysia.date()
+                today_day = today_date.day
 
                 today_data = next(
                     (item for item in data["prayers"] if item["day"] == today_day),
@@ -39,7 +44,7 @@ async def remind(message):
                     raw_time = today_data.get(key, "N/A")
 
                     if isinstance(raw_time, int):
-                        time_str = datetime.fromtimestamp(raw_time).strftime("%H:%M")
+                        time_str = datetime.fromtimestamp(raw_time, tz=utc).astimezone(malaysia).strftime("%H:%M")
                     else:
                         time_str = str(raw_time)[:5]
 

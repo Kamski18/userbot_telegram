@@ -11,4 +11,5 @@ dependencies = [
     "google-genai>=1.56.0",
     "pyrogram>=2.0.106",
     "pyrotgcrypto>=1.2.7",
+    "pytz>=2025.2",
 ]
