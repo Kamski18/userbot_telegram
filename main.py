@@ -35,7 +35,7 @@ async def pray_handlers(_, message):
 
     await message.edit_text(time)
 
-@app.on_message(filetrs.me & filters.command("purge", prefixes="."))
+@app.on_message(filters.me & filters.command("purge", prefixes="."))
 async def purge_handler(_, message):
     await purging.purge(message)
 
