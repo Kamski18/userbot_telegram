@@ -1,6 +1,6 @@
 import logging
 from pyrogram import Client, filters # type: ignore
-from plugins import gemini, prayer_time
+from plugins import gemini, prayer_time, purging
 import os
 
 # 3. Memory: Disable verbose logging if not needed, or use a leaner format
@@ -34,6 +34,10 @@ async def pray_handlers(_, message):
     time = await prayer_time.remind(message)
 
     await message.edit_text(time)
+
+@app.on_message(filetrs.me & filters.command("purge", prefixes="."))
+async def purge_handler(_, message):
+    await purging.purge(message)
 
 # the fastest way to run modern Python scripts
 if __name__ == "__main__":
