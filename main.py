@@ -36,8 +36,8 @@ async def pray_handlers(_, message):
     await message.edit_text(time)
 
 @app.on_message(filters.me & filters.command("purge", prefixes="."))
-async def purge_handler(_, message):
-    await purging.purge(message)
+async def purge_handler(client, message):
+    await purging.purge(client, message)
 
 # the fastest way to run modern Python scripts
 if __name__ == "__main__":
