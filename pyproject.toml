@@ -9,4 +9,5 @@ dependencies = [
     "google>=3.0.0",
     "google-genai>=1.56.0",
     "pyrogram>=2.0.106",
+    "pytz>=2025.2",
 ]
