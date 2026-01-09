@@ -1,6 +1,6 @@
 import logging
 from pyrogram import Client, filters # type: ignore
-from plugins import gemini, prayer_time, purging
+from plugins import gemini, prayer_time, purging, help
 import os
 
 # 3. Memory: Disable verbose logging if not needed, or use a leaner format
@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.WARNING)
 SESSION_STRING = os.getenv("SESSION_STRING")
 
 app = Client(
-    name="Kamski's Acount",
+    name="Kamski's Account",
     api_hash=gemini.API_HASH, # type: ignore
     api_id=gemini.API_ID, # type: ignore
     session_string=SESSION_STRING, # type:ignore
@@ -38,6 +38,10 @@ async def pray_handlers(_, message):
 @app.on_message(filters.me & filters.command("purge", prefixes="."))
 async def purge_handler(client, message):
     await purging.purge(client, message)
+    
+@app.on_message(filters.me & filters.command("help", prefixes="."))
+async def help_handler(_, message):
+    await help.helper(message)
 
 # the fastest way to run modern Python scripts
 if __name__ == "__main__":
