@@ -1,29 +1,27 @@
-# Use a standard Python image
+# 1. Use a stable Python version
 FROM python:3.10-slim-bookworm
 
-# 1. Install uv directly from their official image
+# 2. Install uv directly
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 # Set working directory
 WORKDIR /app
 
-# Optimize uv behavior
+# --- FIX: Force uv to use the system Python 3.10 ---
+ENV UV_PYTHON_PREFERENCE=only-system
+ENV UV_PYTHON=/usr/local/bin/python3.10
 ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
+# --------------------------------------------------
 
-# 2. Copy dependency files first
-# (Ensure you have both pyproject.toml and uv.lock in your repo)
+# 3. Copy dependency files first
 COPY pyproject.toml uv.lock ./
 
-# 3. Install dependencies
-# --frozen: strictly use the lockfile (fails if lockfile is out of sync)
-# --no-install-project: strictly installs dependencies, not your bot code itself yet
-RUN uv sync --frozen --no-install-project --no-dev
+# 4. Install dependencies 
+# We use --system to ensure it doesn't create a secondary venv inside Docker
+RUN uv pip install --system --no-cache -r pyproject.toml
 
-# 4. Copy the rest of your code
+# 5. Copy the rest of your code
 COPY . .
 
-# 5. Run the bot
-# "uv run" automatically finds the virtual environment created in step 3
-# CHANGE 'main.py' to your actual file name!
-CMD ["uv", "run", "main.py"]
+# 6. Run the bot directly with the system python
+CMD ["python", "main.py"]
