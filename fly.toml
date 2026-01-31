@@ -1,0 +1,11 @@
+app = "kamski-userbot"
+primary_region = "ams"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[processes]
+  # uv run is the command we want here
+  app = "uv run main.py" 
+
+# No [[services]] section!
