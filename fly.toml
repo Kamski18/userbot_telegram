@@ -1,11 +1,18 @@
-app = "kamski-userbot"
-primary_region = "ams"
+# fly.toml app configuration file generated for kamski-userbot on 2026-01-31T23:48:01+08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'kamski-userbot'
+primary_region = 'sin'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [processes]
-  # uv run is the command we want here
-  app = "uv run main.py" 
+  app = 'uv run main.py'
 
-# No [[services]] section!
+[[vm]]
+  memory = '256mb'
+  cpus = 1
+  memory_mb = 256
